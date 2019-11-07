@@ -12,27 +12,30 @@
 
 namespace CoreShop\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
-use CoreShop\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
-final class RegisterPimcoreResourcesPass implements CompilerPassInterface
+final class ValidatorAutoMappingFixPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        try {
-            $resources = $container->getParameter('coreshop.all.pimcore_classes');
-            $registry = $container->findDefinition(RegistryInterface::class);
-        } catch (InvalidArgumentException $exception) {
+        if (!$container->hasParameter('validator.auto_mapping')) {
             return;
         }
 
-        foreach ($resources as $alias => $configuration) {
-            $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);
+        $autoMapping = $container->getParameter('validator.auto_mapping');
+
+        if ([] !== $autoMapping) {
+            return;
         }
+
+        $container->setParameter('validator.auto_mapping', [
+            'AppBundle\Entity' => [
+                'services' => [],
+            ],
+        ]);
     }
 }
