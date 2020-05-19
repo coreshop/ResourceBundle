@@ -14,18 +14,21 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\ResourceBundle\Installer;
 
-use Pimcore\Db;
+use Pimcore\Extension\Bundle\Exception\BundleNotFoundException;
+use Pimcore\Extension\Bundle\PimcoreBundleManager;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-final class SqlInstaller implements ResourceInstallerInterface
+final class PimcoreDependantBundleInstaller implements ResourceInstallerInterface
 {
     private $kernel;
+    private $bundleManager;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, PimcoreBundleManager $bundleManager)
     {
         $this->kernel = $kernel;
+        $this->bundleManager = $bundleManager;
     }
 
     /**
@@ -33,10 +36,13 @@ final class SqlInstaller implements ResourceInstallerInterface
      */
     public function installResources(OutputInterface $output, string $applicationName = null, array $options = []): void
     {
-        $parameter = $applicationName ? sprintf('%s.pimcore.admin.install.sql', $applicationName) : 'coreshop.all.pimcore.admin.install.sql';
+        $parameter = $applicationName ?
+            sprintf('%s.dependant.bundles', $applicationName) :
+            'coreshop.all.dependant.bundles'
+        ;
 
         if ($this->kernel->getContainer()->hasParameter($parameter)) {
-            $sqlFilesToExecute = $this->kernel->getContainer()->getParameter($parameter);
+            $bundlesToInstall = $this->kernel->getContainer()->getParameter($parameter);
 
             $progress = new ProgressBar($output);
             $progress->setBarCharacter('<info>░</info>');
@@ -44,14 +50,20 @@ final class SqlInstaller implements ResourceInstallerInterface
             $progress->setProgressCharacter('<comment>░</comment>');
             $progress->setFormat(' %current%/%max% [%bar%] %percent:3s%% %message%');
 
-            $db = Db::get();
+            $progress->start(count($bundlesToInstall));
 
-            $progress->start(count($sqlFilesToExecute));
+            foreach ($bundlesToInstall as $bundleName) {
+                $progress->setMessage(sprintf('Install Bundle "%s"', $bundleName));
 
-            foreach ($sqlFilesToExecute as $sqlFile) {
-                $progress->setMessage(sprintf('<info>Execute SQL File %s</info>', $sqlFile));
+                try {
+                    $bundle = $this->bundleManager->getActiveBundle($bundleName, false);
 
-                $db->executeQuery(file_get_contents($this->kernel->locateResource($sqlFile)));
+                    if ($this->bundleManager->canBeInstalled($bundle)) {
+                        $this->bundleManager->install($bundle);
+                    }
+                } catch (BundleNotFoundException $ex) {
+                    $progress->setMessage(sprintf('<error>Bundle not found "%s"</error>', $bundleName));
+                }
 
                 $progress->advance();
             }
@@ -59,7 +71,7 @@ final class SqlInstaller implements ResourceInstallerInterface
             $progress->finish();
             $progress->clear();
 
-            $output->writeln('  - <info>SQLs have been installed successfully</info>');
+            $output->writeln('  - <info>Dependant Bundles have been installed successfully</info>');
         }
     }
 }
