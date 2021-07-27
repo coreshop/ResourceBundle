@@ -167,7 +167,7 @@ final class ObjectManager implements \Doctrine\Persistence\ObjectManager
         $id = spl_object_hash($resource);
 
         if (method_exists($resource, 'getId')) {
-            $id = $resource->getId();
+            $id = $resource->getId() ?? $id;
         }
 
         return $id;
