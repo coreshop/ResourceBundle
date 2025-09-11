@@ -15,11 +15,11 @@ import { serviceIds } from '@pimcore/studio-ui-bundle/app'
 import { type IconLibrary } from '@pimcore/studio-ui-bundle/modules/icon-library'
 
 // @ts-ignore
-import cursorIcon from '../assets/cursor.svg?react'
+import cursorIcon from '../../assets/cursor.svg?react'
 // @ts-ignore
-import logoIcon from '../assets/logo.svg?react'
+import logoIcon from '../../assets/logo.svg?react'
 // @ts-ignore
-import servicesIcon from '../assets/services.svg?react'
+import servicesIcon from '../../assets/services.svg?react'
 
 export const ResourceBundleIconModule: AbstractModule = {
   onInit(): void {
