@@ -15,9 +15,11 @@ declare(strict_types=1);
  *
  */
 
-namespace CoreShop\Bundle\ResourceBundle\Installer;
+namespace CoreShop\Bundle\ResourceBundle\AdminClass\Installer;
 
 use CoreShop\Bundle\ResourceBundle\Installer\Configuration\GridConfigConfiguration;
+use CoreShop\Bundle\ResourceBundle\Installer\PimcoreClassInstallerInterface;
+use CoreShop\Bundle\ResourceBundle\Installer\ResourceInstallerInterface;
 use CoreShop\Bundle\ResourceBundle\Pimcore\ObjectManager;
 use CoreShop\Component\Pimcore\DataObject\GridConfigInstallerInterface;
 use CoreShop\Component\Resource\Metadata\RegistryInterface;
@@ -45,6 +47,15 @@ final class PimcoreGridConfigInstaller implements ResourceInstallerInterface
         $parameter = $applicationName ? sprintf('%s.pimcore.admin.install.grid_config', $applicationName) : 'coreshop.all.pimcore.admin.install.grid_config';
 
         if ($this->kernel->getContainer()->hasParameter($parameter)) {
+            if (
+                !class_exists(\Pimcore\Bundle\AdminBundle\Model\GridConfig::class)
+                || !class_exists(\Pimcore\Bundle\AdminBundle\Model\GridConfig\Listing::class)
+            ) {
+                $output->writeln('  - <comment>Skip Grid Config installation (Classic Admin not installed)</comment>');
+
+                return;
+            }
+
             /**
              * @var array $routeFilesToInstall
              */

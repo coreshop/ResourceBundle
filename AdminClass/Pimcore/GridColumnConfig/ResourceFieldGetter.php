@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace CoreShop\Bundle\ResourceBundle\Pimcore\GridColumnConfig;
+namespace CoreShop\Bundle\ResourceBundle\AdminClass\Pimcore\GridColumnConfig;
 
 use CoreShop\Component\Resource\Model\ResourceInterface;
 use Pimcore\Bundle\AdminBundle\DataObject\GridColumnConfig\Operator\AbstractOperator;
