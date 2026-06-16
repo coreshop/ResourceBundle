@@ -20,8 +20,8 @@
       "api": ""
     },
     "globalName": "coreshopresource",
-    "pluginVersion": "2.4.0",
-    "publicPath": "/bundles/coreshopresource/studio/7a977300-ee03-4e6d-b03b-2e80e189f82b/"
+    "pluginVersion": "2.5.1",
+    "publicPath": "/bundles/coreshopresource/studio/228373f0-c6ef-493e-9768-37818c4be577/"
   },
   "shared": [
     {
