@@ -21,7 +21,7 @@
     },
     "globalName": "coreshopresource",
     "pluginVersion": "2.5.1",
-    "publicPath": "/bundles/coreshopresource/studio/ebfe31d8-7002-4281-bf14-6b70fe578ebe/"
+    "publicPath": "/bundles/coreshopresource/studio/fa2e2697-85b0-42d0-9b2a-015cf48eb5cc/"
   },
   "shared": [
     {
@@ -164,7 +164,7 @@
       "federationContainerName": "promise new Promise(resolve => {\n      const studioUIBundleRemoteUrl = window.StudioUIBundleRemoteUrl\n      const script = document.createElement('script')\n\n      let hasScript = false;\n\n      document.querySelectorAll('script').forEach((el) => {\n        const elPathname = el.src.replace(/https?:\\/\\/[^/]+/, '')\n        const studioUIBundleRemoteUrlPathname = studioUIBundleRemoteUrl.replace(/https?:\\/\\/[^/]+/, '')\n\n        if (elPathname === studioUIBundleRemoteUrlPathname) {\n          hasScript = true;\n          return;\n        }\n      })\n\n      if (hasScript) {\n        resolve({\n          get: (request) => window['pimcore_studio_ui_bundle'].get(request),\n          init: (...arg) => {\n            try {\n              return window['pimcore_studio_ui_bundle'].init(...arg)\n            } catch(e) {\n              console.log('remote container already initialized')\n            }\n          }\n        })\n        return\n      }\n\n      script.src = studioUIBundleRemoteUrl\n      script.onload = () => {\n        const proxy = {\n          get: (request) => window['pimcore_studio_ui_bundle'].get(request),\n          init: (...arg) => {\n            try {\n              return window['pimcore_studio_ui_bundle'].init(...arg)\n            } catch(e) {\n              console.log('remote container already initialized')\n            }\n          }\n        }\n        resolve(proxy)\n      }\n      document.head.appendChild(script);\n    })\n    ",
       "moduleName": ".",
       "usedIn": [
-        "src/main.ts + 17 modules",
+        "src/main.ts + 18 modules",
         ".../../../StudioFormBundle/Resources/assets/pimcore-studio/src/index.ts + 11 modules"
       ],
       "version": "*"
@@ -175,7 +175,7 @@
       "federationContainerName": "promise new Promise(resolve => {\n      const studioUIBundleRemoteUrl = window.StudioUIBundleRemoteUrl\n      const script = document.createElement('script')\n\n      let hasScript = false;\n\n      document.querySelectorAll('script').forEach((el) => {\n        const elPathname = el.src.replace(/https?:\\/\\/[^/]+/, '')\n        const studioUIBundleRemoteUrlPathname = studioUIBundleRemoteUrl.replace(/https?:\\/\\/[^/]+/, '')\n\n        if (elPathname === studioUIBundleRemoteUrlPathname) {\n          hasScript = true;\n          return;\n        }\n      })\n\n      if (hasScript) {\n        resolve({\n          get: (request) => window['pimcore_studio_ui_bundle'].get(request),\n          init: (...arg) => {\n            try {\n              return window['pimcore_studio_ui_bundle'].init(...arg)\n            } catch(e) {\n              console.log('remote container already initialized')\n            }\n          }\n        })\n        return\n      }\n\n      script.src = studioUIBundleRemoteUrl\n      script.onload = () => {\n        const proxy = {\n          get: (request) => window['pimcore_studio_ui_bundle'].get(request),\n          init: (...arg) => {\n            try {\n              return window['pimcore_studio_ui_bundle'].init(...arg)\n            } catch(e) {\n              console.log('remote container already initialized')\n            }\n          }\n        }\n        resolve(proxy)\n      }\n      document.head.appendChild(script);\n    })\n    ",
       "moduleName": "app",
       "usedIn": [
-        "src/main.ts + 17 modules"
+        "src/main.ts + 18 modules"
       ],
       "version": "*"
     },
@@ -185,7 +185,7 @@
       "federationContainerName": "promise new Promise(resolve => {\n      const studioUIBundleRemoteUrl = window.StudioUIBundleRemoteUrl\n      const script = document.createElement('script')\n\n      let hasScript = false;\n\n      document.querySelectorAll('script').forEach((el) => {\n        const elPathname = el.src.replace(/https?:\\/\\/[^/]+/, '')\n        const studioUIBundleRemoteUrlPathname = studioUIBundleRemoteUrl.replace(/https?:\\/\\/[^/]+/, '')\n\n        if (elPathname === studioUIBundleRemoteUrlPathname) {\n          hasScript = true;\n          return;\n        }\n      })\n\n      if (hasScript) {\n        resolve({\n          get: (request) => window['pimcore_studio_ui_bundle'].get(request),\n          init: (...arg) => {\n            try {\n              return window['pimcore_studio_ui_bundle'].init(...arg)\n            } catch(e) {\n              console.log('remote container already initialized')\n            }\n          }\n        })\n        return\n      }\n\n      script.src = studioUIBundleRemoteUrl\n      script.onload = () => {\n        const proxy = {\n          get: (request) => window['pimcore_studio_ui_bundle'].get(request),\n          init: (...arg) => {\n            try {\n              return window['pimcore_studio_ui_bundle'].init(...arg)\n            } catch(e) {\n              console.log('remote container already initialized')\n            }\n          }\n        }\n        resolve(proxy)\n      }\n      document.head.appendChild(script);\n    })\n    ",
       "moduleName": "modules/element",
       "usedIn": [
-        "src/main.ts + 17 modules"
+        "src/main.ts + 18 modules"
       ],
       "version": "*"
     }
@@ -204,12 +204,13 @@
       "assets": {
         "js": {
           "sync": [
-            "static/js/248.f692816b.js",
-            "static/js/511.b7b2d6d1.js",
-            "static/js/async/__federation_expose_default_export.6f640e81.js"
+            "static/js/159.3750146e.js",
+            "static/js/511.20e36baa.js",
+            "static/js/async/190.ad222441.js",
+            "static/js/async/__federation_expose_default_export.d59c8d05.js"
           ],
           "async": [
-            "static/js/async/11.a489797e.js"
+            "static/js/async/11.a2e3632e.js"
           ]
         },
         "css": {
