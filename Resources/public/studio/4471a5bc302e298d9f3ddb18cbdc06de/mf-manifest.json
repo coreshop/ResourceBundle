@@ -21,7 +21,7 @@
     },
     "globalName": "coreshopresource",
     "pluginVersion": "2.8.0",
-    "publicPath": "/bundles/coreshopresource/studio/4e8a219e53ca1af58926c35745c497e5/"
+    "publicPath": "/bundles/coreshopresource/studio/4471a5bc302e298d9f3ddb18cbdc06de/"
   },
   "shared": [
     {
@@ -254,7 +254,7 @@
         "js": {
           "sync": [
             "static/js/290.6e36820c.js",
-            "static/js/async/__federation_expose_default_export.805b8265.js"
+            "static/js/async/__federation_expose_default_export.632f1bb8.js"
           ],
           "async": [
             "static/js/async/254.cb582046.js"
